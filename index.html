@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Abhishek Maurya · Portfolio</title>
+    <meta name="description" content="Portfolio of Abhishek Maurya — ML Engineer & Data Engineer. Projects, experience, and contact." />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Devicon (tech logos) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --accent:#6366f1; --accent-2:#10b981;
+        --ring-dark:rgba(255,255,255,.08); --ring-light:rgba(2,6,23,.10);
+        --shadow-light:0 10px 28px rgba(2,6,23,.08), 0 1px 0 rgba(2,6,23,.03) inset;
+        --shadow-light-hover:0 20px 46px rgba(2,6,23,.12), 0 1px 0 rgba(2,6,23,.03) inset;
+        --shadow-dark:0 10px 24px rgba(0,0,0,.25);
+      }
+      *{scroll-behavior:smooth}
+      body{font-family:'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial}
+
+      /* Navbar */
+      .glassy{backdrop-filter:saturate(120%) blur(10px)}
+      .brand-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--accent), var(--accent-2));margin-right:6px}
+
+      /* Hero */
+      .hero-section{position:relative;padding:4rem 0 3rem}
+      .gradient-text{background:linear-gradient(90deg,#818cf8,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent}
+      .hero-img{max-width:360px;border-radius:16px;border:1px solid var(--ring-dark);box-shadow:0 30px 90px rgba(2,6,23,.12)}
+      .floating-cta{position:fixed;right:1.2rem;bottom:1.2rem;border-radius:999px;padding:.8rem 1rem;z-index:50}
+
+      /* Social row */
+      .social-row{display:flex;align-items:center;gap:12px;margin-top:.8rem}
+      .divider-v{width:1px;height:24px;background:rgba(127,127,127,.3);margin:0 8px}
+      .social-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;border:1px solid rgba(127,127,127,.35)}
+      .social-icon:hover{transform:translateY(-1px);background:rgba(127,127,127,.08)}
+
+      /* Work cards / surfaces */
+      .surface{border-radius:16px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+      .surface:hover{transform:translateY(-2px)}
+      .work-card{transition:transform .25s ease, box-shadow .25s ease;overflow:hidden}
+      .work-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.12)}
+
+      /* Timeline */
+      .timeline{position:relative;margin-left:1rem}
+      .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2))}
+      .tl-item{position:relative;padding-left:2.5rem;margin-bottom:2rem}
+      .tl-dot{position:absolute;left:2px;top:.35rem;width:16px;height:16px;border-radius:50%;box-shadow:0 0 0 3px rgba(16,185,129,.2);border:3px solid var(--accent-2)}
+      .tl-card{position:relative;padding:1rem;border-radius:16px}
+      .tl-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:16px 0 0 16px;background:linear-gradient(180deg,var(--accent),var(--accent-2));opacity:.7}
+
+      /* Skills marquee */
+      #skills{position:relative}
+      .skills-space{position:relative;border-radius:16px;padding:22px 12px;overflow:hidden}
+      .skills-space::before,.skills-space::after{content:"";position:absolute;inset:-50% -10% -10% -10%;pointer-events:none;background-image:
+        radial-gradient(1px 1px at 10% 20%, currentColor 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 30% 80%, currentColor 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 70% 30%, currentColor 50%, transparent 51%),
+        radial-gradient(1px 1px at 90% 60%, currentColor 50%, transparent 51%),
+        radial-gradient(1px 1px at 50% 50%, currentColor 50%, transparent 51%);
+        background-size:160px 160px,220px 220px,180px 180px,260px 260px,200px 200px;background-repeat:repeat;opacity:.18}
+      .skills-space::after{transform:rotate(15deg);opacity:.12}
+      .row-title{font-size:.9rem;text-transform:uppercase;letter-spacing:.12em;margin:10px 10px 6px}
+      .marquee{overflow:hidden;white-space:nowrap}
+      .track{display:inline-flex;gap:14px;padding:8px 10px;animation:scroll var(--speed,30s) linear infinite}
+      .marquee:hover .track{animation-play-state:paused}
+      @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+      .chip{display:inline-flex;align-items:center;gap:8px;padding:.42rem .7rem;border-radius:999px;font-weight:700;font-size:.93rem;transition:transform .15s ease}
+      .chip i{font-size:20px;line-height:0}
+      .chip:hover{transform:translateY(-1px)}
+      .chip--accent{box-shadow:0 0 0 2px rgba(99,102,241,.14) inset}
+      .chip--green{box-shadow:0 0 0 2px rgba(16,185,129,.14) inset}
+
+      /* Education cards */
+      .edu-card{position:relative;border-radius:18px;padding:20px 22px;overflow:hidden}
+      .edu-card::after{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+      .edu-meta{font-size:.9rem;color:var(--bs-secondary-color)}
+      .edu-icon{width:42px;height:42px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;margin-right:10px}
+
+      /* Contact */
+      .contact-chip{display:inline-flex;align-items:center;gap:8px;padding:.5rem .7rem;border-radius:12px;border:1px solid var(--ring-light);background:linear-gradient(180deg,#fff,#fbfdff)}
+      .contact-chip i{font-size:18px}
+      .contact-info-title{font-size:.9rem;text-transform:uppercase;letter-spacing:.12em;color:var(--bs-secondary-color)}
+
+      /* Simple reveals */
+      .reveal{opacity:0;transform:translateY(12px);transition:all .6s cubic-bezier(.2,.8,.2,1)}
+      .reveal.revealed{opacity:1;transform:none}
+
+      /* Theme specifics */
+      [data-bs-theme="light"] .glassy{background-color:rgba(255,255,255,.78)!important;border-bottom:1px solid var(--ring-light)}
+      [data-bs-theme="light"] .hero-section{background:
+        radial-gradient(60% 80% at 20% 0%, rgba(99,102,241,.12), rgba(255,255,255,0)),
+        radial-gradient(40% 60% at 100% 0%, rgba(16,185,129,.12), rgba(255,255,255,0)),
+        linear-gradient(#ffffff,#f8fafc)}
+      [data-bs-theme="light"] .skills-space{background:linear-gradient(#ffffff,#fbfdff);border:1px solid var(--ring-light);color:#94a3b8}
+      [data-bs-theme="light"] .row-title{color:#374151;opacity:.95}
+      [data-bs-theme="light"] .chip{border:1px solid rgba(2,6,23,.16);background:linear-gradient(180deg,rgba(2,6,23,.03),rgba(2,6,23,.01));color:#0f172a}
+      [data-bs-theme="light"] .surface{background:linear-gradient(180deg,#fff 0%,#fbfdff 100%);border:1px solid var(--ring-light);box-shadow:var(--shadow-light)}
+      [data-bs-theme="light"] .surface:hover{box-shadow:var(--shadow-light-hover)}
+      [data-bs-theme="light"] .form-control.surface{background:#fff}
+      [data-bs-theme="light"] .divider-v{background:rgba(2,6,23,.15)}
+      [data-bs-theme="light"] .social-icon{border-color:rgba(2,6,23,.16)}
+      [data-bs-theme="light"] .form-control:focus{border-color:#6366f1;box-shadow:0 0 0 .22rem rgba(99,102,241,.25)}
+      [data-bs-theme="light"] .edu-icon{background:linear-gradient(180deg,#eef2ff,#ecfeff);border:1px solid rgba(2,6,23,.08)}
+      [data-bs-theme="light"] footer{background:#fff}
+
+      [data-bs-theme="dark"] .glassy{background-color:rgba(17,24,39,.78)!important;border-bottom:1px solid var(--ring-dark)}
+      [data-bs-theme="dark"] .hero-section{background:
+        radial-gradient(60% 80% at 20% 0%, rgba(99,102,241,.18), rgba(17,24,39,0)),
+        radial-gradient(40% 60% at 100% 0%, rgba(16,185,129,.18), rgba(17,24,39,0))}
+      [data-bs-theme="dark"] .skills-space{background:#06080d;border:1px solid var(--ring-dark);color:#cbd5e1}
+      [data-bs-theme="dark"] .row-title{color:#a5b4fc;opacity:.9}
+      [data-bs-theme="dark"] .chip{border:1px solid rgba(255,255,255,.2);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));color:#e5e7eb}
+      [data-bs-theme="dark"] .surface{background:rgba(255,255,255,.02);border:1px solid var(--ring-dark);box-shadow:var(--shadow-dark)}
+      [data-bs-theme="dark"] .edu-icon{background:rgba(255,255,255,.06);border:1px solid var(--ring-dark)}
+      [data-bs-theme="dark"] .form-control:focus{border-color:#818cf8;box-shadow:0 0 0 .22rem rgba(129,140,248,.25)}
+    </style>
+  </head>
+  <body>
+    <a href="#contact" class="floating-cta btn btn-primary btn-lg shadow-lg" aria-label="Contact"><i class="bi bi-send"></i></a>
+
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg sticky-top glassy">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#"><span class="brand-dot"></span> Abhishek</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+            <li class="nav-item"><a class="nav-link" href="#volunteer">Volunteer</a></li>
+            <li class="nav-item"><a class="nav-link" href="#certs">Certifications</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+          <div class="d-flex gap-2 align-items-center">
+            <a class="btn btn-outline-secondary btn-sm" href="assets/Abhishek_Maurya_Resume.pdf" target="_blank"><i class="bi bi-filetype-pdf me-1"></i>Resume</a>
+            <button class="btn btn-outline-secondary btn-sm" id="themeToggle" aria-label="Toggle theme"><i class="bi bi-moon"></i></button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="home" class="hero-section border-bottom overflow-hidden">
+      <div class="container position-relative">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <div class="badge text-bg-success mb-3">Available for work</div>
+            <h1 class="display-4 fw-bold lh-1 mb-2"><span class="gradient-text">Abhishek Maurya</span></h1>
+            <p class="lead text-secondary-emphasis">ML Engineer · Data Engineer · Business Analyst</p>
+            <p class="mb-3">I build production-grade data pipelines and ML systems that turn messy data into clean outcomes — from ETL and dashboards to GenAI and RAG agents.</p>
+            <div class="d-flex gap-2 flex-wrap mb-2">
+              <a class="btn btn-primary" href="#work">View Work</a>
+              <a class="btn btn-outline-secondary" href="#contact">Contact</a>
+            </div>
+            <div class="social-row">
+              <a class="btn btn-warning fw-bold" href="assets/Abhishek_Maurya_Resume.pdf" target="_blank">RESUME</a>
+              <span class="divider-v"></span>
+              <a class="social-icon" href="https://www.linkedin.com/in/abhishek-maurya-luffy/" target="_blank" aria-label="LinkedIn"><i class="devicon-linkedin-plain" style="font-size:22px"></i></a>
+              <a class="social-icon" href="mailto:abhishek2504maurya@gmail.com" aria-label="Gmail">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 48 48">
+                  <path fill="#EA4335" d="M24 24L3 9v30a3 3 0 0 0 3 3h6V18l12 8l12-8v24h6a3 3 0 0 0 3-3V9L24 24z"/>
+                  <path fill="#FBBC05" d="M3 12.5V9l21 15l21-15v3.5L24 27.5L3 12.5z"/>
+                  <path fill="#4285F4" d="M36 42V18l-12 8l-12-8v24h24z"/>
+                  <path fill="#34A853" d="M6 42a3 3 0 0 1-3-3V12.5L3 9l21 15l21-15v3.5V39a3 3 0 0 1-3 3h-6V18L24 26l-12-8v24H6z"/>
+                </svg>
+              </a>
+              <a class="social-icon" href="https://github.com/Abhishek-0402" target="_blank" aria-label="GitHub"><i class="devicon-github-original" style="font-size:22px"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-5 text-center">
+            <img src="assets/profile.jpg" class="img-fluid hero-img" alt="Profile" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== Skills ===== -->
+    <section id="skills" class="py-5 border-bottom">
+      <div class="container">
+        <h2 class="h3 fw-bold mb-3">Skills</h2>
+
+        <div class="skills-space">
+
+          <!-- Row 1 -->
+          <div class="row-title">Programming & Query Languages</div>
+          <div class="marquee" style="--speed:36s">
+            <div class="track">
+              <span class="chip chip--accent"><i class="devicon-python-plain colored"></i>Python</span>
+              <span class="chip"><i class="devicon-postgresql-plain colored"></i>SQL</span>
+              <span class="chip"><i class="devicon-postgresql-plain colored"></i>Postgres</span>
+              <span class="chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+              <span class="chip">Snowflake (SQL)</span>
+              <span class="chip"><i class="devicon-r-plain colored"></i>R</span>
+              <span class="chip">SAS</span>
+              <span class="chip">VBA</span>
+              <span class="chip"><i class="devicon-apachespark-original colored"></i>PySpark</span>
+              <span class="chip">SparkSQL</span>
+              <span class="chip">DAX</span>
+              <!-- dup -->
+              <span class="chip chip--accent"><i class="devicon-python-plain colored"></i>Python</span>
+              <span class="chip"><i class="devicon-postgresql-plain colored"></i>SQL</span>
+              <span class="chip"><i class="devicon-postgresql-plain colored"></i>Postgres</span>
+              <span class="chip"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+              <span class="chip">Snowflake (SQL)</span>
+              <span class="chip"><i class="devicon-r-plain colored"></i>R</span>
+              <span class="chip">SAS</span>
+              <span class="chip">VBA</span>
+              <span class="chip"><i class="devicon-apachespark-original colored"></i>PySpark</span>
+              <span class="chip">SparkSQL</span>
+              <span class="chip">DAX</span>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="row-title">Libraries & Frameworks</div>
+          <div class="marquee" style="--speed:40s">
+            <div class="track">
+              <span class="chip"><i class="devicon-pandas-original colored"></i>Pandas</span>
+              <span class="chip"><i class="devicon-numpy-original colored"></i>NumPy</span>
+              <span class="chip"><i class="devicon-scikitlearn-plain colored"></i>scikit-learn</span>
+              <span class="chip"><i class="devicon-tensorflow-original colored"></i>TensorFlow</span>
+              <span class="chip"><i class="devicon-pytorch-original colored"></i>PyTorch</span>
+              <span class="chip"><i class="devicon-opencv-plain colored"></i>OpenCV</span>
+              <span class="chip">Matplotlib</span>
+              <span class="chip">Seaborn</span>
+              <span class="chip">XGBoost</span>
+              <span class="chip">LightGBM</span>
+              <span class="chip">HuggingFace</span>
+              <span class="chip">LangChain</span>
+              <span class="chip">MLflow</span>
+              <!-- dup -->
+              <span class="chip"><i class="devicon-pandas-original colored"></i>Pandas</span>
+              <span class="chip"><i class="devicon-numpy-original colored"></i>NumPy</span>
+              <span class="chip"><i class="devicon-scikitlearn-plain colored"></i>scikit-learn</span>
+              <span class="chip"><i class="devicon-tensorflow-original colored"></i>TensorFlow</span>
+              <span class="chip"><i class="devicon-pytorch-original colored"></i>PyTorch</span>
+              <span class="chip"><i class="devicon-opencv-plain colored"></i>OpenCV</span>
+              <span class="chip">Matplotlib</span>
+              <span class="chip">Seaborn</span>
+              <span class="chip">XGBoost</span>
+              <span class="chip">LightGBM</span>
+              <span class="chip">HuggingFace</span>
+              <span class="chip">LangChain</span>
+              <span class="chip">MLflow</span>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="row-title">Data Analytics & BI</div>
+          <div class="marquee" style="--speed:38s">
+            <div class="track">
+              <span class="chip chip--green">Predictive Modeling</span>
+              <span class="chip">Business Intelligence</span>
+              <span class="chip">Statistical Analysis</span>
+              <span class="chip">Data Wrangling</span>
+              <span class="chip">KPI Monitoring</span>
+              <span class="chip">Campaign Performance</span>
+              <span class="chip">Privacy & Anonymization</span>
+              <span class="chip"><i class="devicon-powerbi-plain colored"></i>Power BI</span>
+              <span class="chip"><i class="devicon-tableau-original colored"></i>Tableau</span>
+              <span class="chip">Sigma</span>
+              <span class="chip">Excel (Advanced)</span>
+              <span class="chip">Google Analytics</span>
+              <!-- dup -->
+              <span class="chip chip--green">Predictive Modeling</span>
+              <span class="chip">Business Intelligence</span>
+              <span class="chip">Statistical Analysis</span>
+              <span class="chip">Data Wrangling</span>
+              <span class="chip">KPI Monitoring</span>
+              <span class="chip">Campaign Performance</span>
+              <span class="chip">Privacy & Anonymization</span>
+              <span class="chip"><i class="devicon-powerbi-plain colored"></i>Power BI</span>
+              <span class="chip"><i class="devicon-tableau-original colored"></i>Tableau</span>
+              <span class="chip">Sigma</span>
+              <span class="chip">Excel (Advanced)</span>
+              <span class="chip">Google Analytics</span>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="row-title">Data Engineering & ETL</div>
+          <div class="marquee" style="--speed:34s">
+            <div class="track">
+              <span class="chip">Data Warehousing</span>
+              <span class="chip">ETL / ELT</span>
+              <span class="chip">dbt</span>
+              <span class="chip">Fivetran</span>
+              <span class="chip">Informatica</span>
+              <span class="chip">Data Pipelines</span>
+              <span class="chip">Data Modeling</span>
+              <span class="chip"><i class="devicon-hadoop-plain colored"></i>Hadoop</span>
+              <span class="chip"><i class="devicon-apachespark-original colored"></i>Spark</span>
+              <span class="chip">Databricks</span>
+              <span class="chip"><i class="devicon-apacheairflow-original colored"></i>Airflow</span>
+              <span class="chip">Kafka</span>
+              <!-- dup -->
+              <span class="chip">Data Warehousing</span>
+              <span class="chip">ETL / ELT</span>
+              <span class="chip">dbt</span>
+              <span class="chip">Fivetran</span>
+              <span class="chip">Informatica</span>
+              <span class="chip">Data Pipelines</span>
+              <span class="chip">Data Modeling</span>
+              <span class="chip"><i class="devicon-hadoop-plain colored"></i>Hadoop</span>
+              <span class="chip"><i class="devicon-apachespark-original colored"></i>Spark</span>
+              <span class="chip">Databricks</span>
+              <span class="chip"><i class="devicon-apacheairflow-original colored"></i>Airflow</span>
+              <span class="chip">Kafka</span>
+            </div>
+          </div>
+
+          <!-- Row 5 -->
+          <div class="row-title">Cloud & DevOps</div>
+          <div class="marquee" style="--speed:42s">
+            <div class="track">
+              <span class="chip"><i class="devicon-amazonwebservices-original colored"></i>AWS</span>
+              <span class="chip">S3</span>
+              <span class="chip">Lambda</span>
+              <span class="chip">Glue</span>
+              <span class="chip">Redshift</span>
+              <span class="chip">SageMaker</span>
+              <span class="chip"><i class="devicon-azure-plain colored"></i>Azure</span>
+              <span class="chip"><i class="devicon-googlecloud-plain colored"></i>GCP</span>
+              <span class="chip"><i class="devicon-docker-plain colored"></i>Docker</span>
+              <span class="chip"><i class="devicon-kubernetes-plain colored"></i>Kubernetes</span>
+              <span class="chip"><i class="devicon-git-plain colored"></i>Git/GitHub</span>
+              <span class="chip">CI/CD</span>
+              <span class="chip">Terraform</span>
+              <!-- dup -->
+              <span class="chip"><i class="devicon-amazonwebservices-original colored"></i>AWS</span>
+              <span class="chip">S3</span>
+              <span class="chip">Lambda</span>
+              <span class="chip">Glue</span>
+              <span class="chip">Redshift</span>
+              <span class="chip">SageMaker</span>
+              <span class="chip"><i class="devicon-azure-plain colored"></i>Azure</span>
+              <span class="chip"><i class="devicon-googlecloud-plain colored"></i>GCP</span>
+              <span class="chip"><i class="devicon-docker-plain colored"></i>Docker</span>
+              <span class="chip"><i class="devicon-kubernetes-plain colored"></i>Kubernetes</span>
+              <span class="chip"><i class="devicon-git-plain colored"></i>Git/GitHub</span>
+              <span class="chip">CI/CD</span>
+              <span class="chip">Terraform</span>
+            </div>
+          </div>
+
+          <!-- Row 6 -->
+          <div class="row-title">AI, GenAI & MLOps</div>
+          <div class="marquee" style="--speed:37s">
+            <div class="track">
+              <span class="chip">NLP</span><span class="chip">LLMs</span><span class="chip">Generative AI</span>
+              <span class="chip chip--accent">RAG</span><span class="chip">Agentic AI</span>
+              <span class="chip">Conversational AI</span><span class="chip">Model Deployment</span>
+              <span class="chip">Monitoring</span><span class="chip">Model Governance</span>
+              <span class="chip">Compliance</span><span class="chip">Responsible AI</span>
+              <!-- dup -->
+              <span class="chip">NLP</span><span class="chip">LLMs</span><span class="chip">Generative AI</span>
+              <span class="chip chip--accent">RAG</span><span class="chip">Agentic AI</span>
+              <span class="chip">Conversational AI</span><span class="chip">Model Deployment</span>
+              <span class="chip">Monitoring</span><span class="chip">Model Governance</span>
+              <span class="chip">Compliance</span><span class="chip">Responsible AI</span>
+            </div>
+          </div>
+
+          <!-- Row 7 -->
+          <div class="row-title">Soft Skills</div>
+          <div class="marquee" style="--speed:45s">
+            <div class="track">
+              <span class="chip">Stakeholder Management</span>
+              <span class="chip">Communication</span>
+              <span class="chip">Design Thinking</span>
+              <span class="chip">Critical Thinking</span>
+              <span class="chip">Problem Solving</span>
+              <span class="chip">Teamwork</span>
+              <span class="chip">Agile/Scrum</span>
+              <span class="chip">Project Management</span>
+              <!-- dup -->
+              <span class="chip">Stakeholder Management</span>
+              <span class="chip">Communication</span>
+              <span class="chip">Design Thinking</span>
+              <span class="chip">Critical Thinking</span>
+              <span class="chip">Problem Solving</span>
+              <span class="chip">Teamwork</span>
+              <span class="chip">Agile/Scrum</span>
+              <span class="chip">Project Management</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="py-5 border-bottom">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-3">
+          <h2 class="h3 fw-bold">Featured Work</h2>
+          <a class="link-secondary" href="#contact">Need something like this?</a>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <a class="card h-100 work-card reveal surface" href="#" target="_blank">
+              <div class="ratio ratio-16x9 bg-body-secondary"></div>
+              <div class="card-body">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="badge bg-primary-subtle text-primary-emphasis">Agentic AI</span>
+                  <span class="badge bg-info-subtle text-info-emphasis">RAG</span>
+                </div>
+                <h3 class="h5 mb-1">Agentic AI HR Assistant</h3>
+                <p class="small text-secondary mb-0">LLM agents to screen resumes, answer FAQs and coordinate scheduling. Cut recruiter manual load ~40%.</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a class="card h-100 work-card reveal surface" href="#" target="_blank">
+              <div class="ratio ratio-16x9 bg-body-secondary"></div>
+              <div class="card-body">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="badge bg-success-subtle text-success-emphasis">Forecasting</span>
+                  <span class="badge bg-warning-subtle text-warning-emphasis">Dashboards</span>
+                </div>
+                <h3 class="h5 mb-1">Market Insights & Sales Forecasting</h3>
+                <p class="small text-secondary mb-0">End-to-end ML pipeline with Snowflake + Power BI; reduced reporting time by ~50% and improved visibility.</p>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a class="card h-100 work-card reveal surface" href="#" target="_blank">
+              <div class="ratio ratio-16x9 bg-body-secondary"></div>
+              <div class="card-body">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="badge bg-danger-subtle text-danger-emphasis">NLP</span>
+                  <span class="badge bg-secondary-subtle text-secondary-emphasis">Whisper</span>
+                </div>
+                <h3 class="h5 mb-1">Donor QA Automation</h3>
+                <p class="small text-secondary mb-0">Whisper + Snowflake ML pipeline replacing manual call review; cut QA overhead ~60% and improved validation accuracy.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="py-5 border-bottom">
+      <div class="container">
+        <h2 class="h3 fw-bold mb-4">Experience</h2>
+        <div class="timeline">
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card surface">
+              <h3 class="h5 mb-1">GlobalFaces Direct — ML Engineer & Data Analyst Intern</h3>
+              <p class="small text-secondary mb-2">Toronto, Canada · May 2023 – Present</p>
+              <ul class="mb-0 small">
+                <li>Automated donor QA by replacing manual call review (OBDA &amp; TPV) with Whisper + Snowflake AI/ML pipelines, cutting 60% of QA overhead and improving accuracy in donor validation.</li>
+                <li>Developed Donor Decline &amp; Campaign Success Prediction Models in Python/scikit-learn, boosting retention strategy precision and improving campaign ROI tracking by 25%.</li>
+                <li>Migrated reporting from Excel &amp; Power BI → Snowflake &amp; Sigma, creating dynamic KPI dashboards (churn, pacing, M1%, COA) that reduced reporting time by 70% and improved leadership decision-making.</li>
+                <li>Automated churn analysis pipeline in Snowflake, analyzing 1.8M+ donor records to identify at-risk donors and optimize retention, contributing to a 15% uplift in donor retention.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card surface">
+              <h3 class="h5 mb-1">Avo Automation Pvt Ltd — Data Engineer</h3>
+              <p class="small text-secondary mb-2">Bengaluru, India · Jan 2023 – Dec 2023</p>
+              <ul class="mb-0 small">
+                <li>Built scalable ETL pipelines with Apache Spark &amp; SQL, streamlining ingestion and transformation of large datasets across multiple sources, improving processing speed by 35% and enabling reliable analytics.</li>
+                <li>Developed data infrastructure with CI/CD, Docker, and Kubernetes, automating pipeline deployments and monitoring, which reduced downtime and improved data delivery efficiency for enterprise clients.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card surface">
+              <h3 class="h5 mb-1">Chitkara University — Machine Learning Research Intern</h3>
+              <p class="small text-secondary mb-2">Bangalore, India · Sept 2023 – Jan 2023</p>
+              <ul class="mb-0 small">
+                <li>Designed and deployed MLOps pipelines using CI/CD, Docker, and Kubernetes, enabling seamless model training and automated deployments that improved research reproducibility.</li>
+                <li>Researched and implemented CV (CNNs, OpenCV) and NLP (LLMs) techniques, building POCs that demonstrated scalable AI solutions for academic and enterprise use cases.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-dot"></div>
+            <div class="tl-card surface">
+              <h3 class="h5 mb-1">MiQ Digital — Business Analyst Intern</h3>
+              <p class="small text-secondary mb-2">Bangalore, India · Sept 2021 – Sept 2022</p>
+              <ul class="mb-0 small">
+                <li>Automated ETL workflows using Python, SQL, and APIs, improving reporting efficiency by 30%, and delivered data-driven insights that optimized operations and supported account growth across U.S. &amp; Canadian clients.</li>
+                <li>Designed real-time data pipelines to unify multi-source datasets, enabling faster campaign performance analysis and empowering leadership with actionable dashboards.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="py-5 border-bottom">
+      <div class="container">
+        <h2 class="h3 fw-bold mb-4">Education</h2>
+        <div class="row g-4">
+          <div class="col-md-6 reveal">
+            <div class="surface edu-card d-flex align-items-start">
+              <div class="edu-icon me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-mortarboard-fill text-primary"></i>
+              </div>
+              <div>
+                <h3 class="h5 mb-1">Concordia University — M.Sc. Applied Computer Science</h3>
+                <div class="edu-meta">Montréal, QC · Jan 2024 – Dec 2025</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 reveal">
+            <div class="surface edu-card d-flex align-items-start">
+              <div class="edu-icon me-2 d-flex align-items-center justify-content-center">
+                <i class="bi bi-mortarboard-fill text-success"></i>
+              </div>
+              <div>
+                <h3 class="h5 mb-1">Chitkara University — B.E. Computer Science</h3>
+                <div class="edu-meta">Chandigarh, India · Jul 2019 – Jun 2023</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Volunteer Experience -->
+    <section id="volunteer" class="py-5 border-bottom">
+      <div class="container">
+        <h2 class="h3 fw-bold mb-4">Volunteer Experience</h2>
+        <div class="row g-4">
+          <div class="col-lg-6 reveal">
+            <div class="surface p-4">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-people-fill text-primary me-2"></i>
+                <h3 class="h6 mb-0">Tech Organizer — Chitkara University Hackathons &amp; AI/ML Events</h3>
+              </div>
+              <ul class="small mb-0">
+                <li>Organized coding challenges and ML workshops within the university, engaging 200+ students and fostering a culture of innovation and collaboration.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6 reveal">
+            <div class="surface p-4">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-heart-fill text-success me-2"></i>
+                <h3 class="h6 mb-0">Community Volunteer — Chitkara University</h3>
+              </div>
+              <ul class="small mb-0">
+                <li>Supported university-led initiatives like tech fests and student mentorship programs, encouraging teamwork, inclusion, and continuous learning among peers.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications (years removed) -->
+    <section id="certs" class="py-5 border-bottom">
+      <div class="container">
+        <h2 class="h3 fw-bold mb-3">Certifications</h2>
+        <div class="row g-3">
+          <div class="col-md-6 reveal">
+            <div class="surface p-3 d-flex align-items-center gap-2">
+              <i class="bi bi-patch-check-fill text-primary"></i>
+              <div>Generative AI &amp; RAG Applications with LangChain — <span class="text-secondary">Udemy</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 reveal">
+            <div class="surface p-3 d-flex align-items-center gap-2">
+              <i class="bi bi-patch-check-fill text-primary"></i>
+              <div>Cloud Computing &amp; Big Data Analytics (AWS + GCP) — <span class="text-secondary">Udemy</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 reveal">
+            <div class="surface p-3 d-flex align-items-center gap-2">
+              <i class="bi bi-patch-check-fill text-primary"></i>
+              <div>Machine Learning, Deep Learning &amp; MLOps Fundamentals — <span class="text-secondary">Udemy</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 reveal">
+            <div class="surface p-3 d-flex align-items-center gap-2">
+              <i class="bi bi-patch-check-fill text-primary"></i>
+              <div>Data Engineering with Snowflake and ETL Pipelines — <span class="text-secondary">Udemy</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-5">
+      <div class="container">
+        <h2 class="h3 fw-bold mb-4">Get in touch</h2>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="contact" />
+              <p class="d-none"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+              <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input class="form-control surface" type="text" name="name" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input class="form-control surface" type="email" name="email" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Message</label>
+                <textarea class="form-control surface" name="message" rows="4" required></textarea>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" name="consent" id="consent" />
+                <label class="form-check-label small" for="consent">You can email me back.</label>
+              </div>
+              <button class="btn btn-primary" type="submit">Send</button>
+              <a class="btn btn-outline-secondary ms-2" href="mailto:abhishek2504maurya@gmail.com"><i class="bi bi-envelope"></i> Email</a>
+            </form>
+          </div>
+          <div class="col-lg-6">
+            <div class="surface p-4 h-100">
+              <div class="contact-info-title mb-2">Contact</div>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <a class="contact-chip text-decoration-none" href="mailto:abhishek2504maurya@gmail.com"><i class="bi bi-envelope"></i> abhishek2504maurya@gmail.com</a>
+                <span class="contact-chip"><i class="bi bi-telephone"></i> +1 (263) 880-5587</span>
+                <span class="contact-chip"><i class="bi bi-geo-alt"></i> Montréal / Toronto</span>
+              </div>
+
+              <div class="contact-info-title mb-2">Social</div>
+              <div class="d-flex flex-wrap gap-2">
+                <a class="contact-chip text-decoration-none" href="https://www.linkedin.com/in/abhishek-maurya-luffy/" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                <a class="contact-chip text-decoration-none" href="mailto:abhishek2504maurya@gmail.com" target="_blank"><i class="bi bi-envelope-fill"></i> Gmail</a>
+                <a class="contact-chip text-decoration-none" href="https://github.com/Abhishek-0402" target="_blank"><i class="bi bi-github"></i> GitHub</a>
+                <a class="contact-chip text-decoration-none" href="assets/Abhishek_Maurya_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Resume</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-4 border-top">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center">
+        <span class="small opacity-75">© <span id="year"></span> Abhishek Maurya</span>
+        <a class="small" href="#home">Back to top</a>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Theme toggle + persistence + year + reveal-on-scroll
+      const html=document.documentElement;
+      const saved=localStorage.getItem('theme'); if(saved) html.setAttribute('data-bs-theme',saved);
+      const btn=document.getElementById('themeToggle');
+      const setIcon=()=>btn.innerHTML=html.getAttribute('data-bs-theme')==='dark'?'<i class="bi bi-sun"></i>':'<i class="bi bi-moon"></i>';
+      setIcon();
+      btn?.addEventListener('click',()=>{html.setAttribute('data-bs-theme',html.getAttribute('data-bs-theme')==='dark'?'light':'dark');localStorage.setItem('theme',html.getAttribute('data-bs-theme'));setIcon();});
+      document.getElementById('year').textContent=new Date().getFullYear();
+
+      const observer=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');observer.unobserve(e.target);}}),{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+    </script>
+  </body>
+</html>
